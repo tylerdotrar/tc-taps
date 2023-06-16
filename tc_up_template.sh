@@ -36,4 +36,6 @@ do
     echo "- $i"
     tc qdisc add dev $i ingress
     tc filter add dev $i parent ffff: protocol all u32 match u8 0 0 action mirred egress mirror dev $SPAN_PORT
+    tc qdisc add dev $i handle 1: root prio
+    tc filter add dev $i parent 1: protocol all u32 match u8 0 0 action mirred egress mirror dev $SPAN_PORT
 done < network_taps
