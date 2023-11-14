@@ -17,5 +17,6 @@ while read i;
 do
     echo "- $i"
     tc qdisc del dev $i ingress
+    tc qdisc del dev $i root
     tc filter del dev $i root
 done < network_taps
